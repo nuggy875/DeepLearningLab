@@ -1,4 +1,5 @@
 # Lab 4 Multi-variable linear regression
+# 파일 가져오기 Using Queue runner
 # https://www.tensorflow.org/programmers_guide/reading_data
 
 import tensorflow as tf
@@ -16,6 +17,7 @@ record_defaults = [[0.], [0.], [0.], [0.]]
 xy = tf.decode_csv(value, record_defaults=record_defaults)
 
 # collect batches of csv in
+# 한번에 10개씩 가져와
 train_x_batch, train_y_batch = \
     tf.train.batch([xy[0:-1], xy[-1:]], batch_size=10)
 

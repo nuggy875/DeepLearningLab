@@ -11,8 +11,15 @@ y_data = xy[:, [-1]]
 
 # Make sure the shape and data are OK
 # 데이터가 맞게 들어갔는지 확인하고 가자
-print(x_data.shape, x_data, len(x_data))
-print(y_data.shape, y_data)
+print('----- X의 데이터 -----')
+print(x_data.shape)
+print(len(x_data))
+print(x_data)
+
+print('----- Y의 데이터 -----')
+print(y_data.shape)
+print(len(y_data))
+print(y_data)
 
 # placeholders for a tensor that will be always fed.
 # Nx3, Nx1
@@ -37,23 +44,16 @@ sess = tf.Session()
 # Initializes global variables in the graph.
 sess.run(tf.global_variables_initializer())
 
-for step in range(2001):
-    cost_val, hy_val, _ = sess.run(
-        [cost, hypothesis, train], feed_dict={X: x_data, Y: y_data})
+for step in range(20001):
+    cost_val, hy_val, _ = sess.run([cost, hypothesis, train], feed_dict={X: x_data, Y: y_data})
     if step % 10 == 0:
         print(step, "Cost: ", cost_val, "\nPrediction:\n", hy_val)
 
 # Ask my score
 # Testing
-print("Your score will be ", sess.run(
+print('----- Testing Score -----')
+print("100점, 70점, 101점이면 Your score will be ", sess.run(
     hypothesis, feed_dict={X: [[100, 70, 101]]}))
 
 print("Other scores will be ", sess.run(hypothesis,
                                         feed_dict={X: [[60, 70, 110], [90, 100, 80]]}))
-
-'''
-Your score will be  [[ 181.73277283]]
-Other scores will be  [[ 145.86265564]
- [ 187.23129272]]
-
-'''
