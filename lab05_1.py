@@ -19,16 +19,19 @@ W = tf.Variable(tf.random_normal([8, 1], name='weight'))
 b = tf.Variable(tf.random_normal([1], name='bias'))
 
 
+# Sigmoid 함수
 hypothesis = tf.sigmoid(tf.matmul(X, W) + b)
 
+# Cost Function (Cross - Entropy)
 cost = -tf.reduce_mean(Y*tf.log(hypothesis) + (1-Y) * tf.log(1-hypothesis))
+
 
 train = tf.train.GradientDescentOptimizer(learning_rate=0.01).minimize(cost)
 
 sess = tf.Session()
 sess.run(tf.global_variables_initializer())
 
-for step in range(10001):
+for step in range(100001):
     hyp_val, cost_val, _ = sess.run([hypothesis, cost, train], feed_dict={X: x_data, Y: y_data})
     if step % 20 == 0:
         print(step, "::", cost_val)
